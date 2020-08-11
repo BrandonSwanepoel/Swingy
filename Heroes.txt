@@ -5,7 +5,6 @@ XP 100
 Attack 25
 Defense 10
 Hit Points 45
-Artefacs
 Weapons 10
 Armor 5
 Helm 10
@@ -17,7 +16,6 @@ XP 100
 Attack 20
 Defense 20
 Hit Points 30
-Artefacs
 Weapons 5
 Armor 5
 Helm 10
@@ -29,22 +27,20 @@ XP 100
 Attack 30
 Defense 15
 Hit Points 35
-Artefacs
 Weapons 10
 Armor 2
 Helm 15
 
 UncleBob
 Class Lazy
-Level 1
-XP 100
-Attack 10
-Defense 5
-Hit Points 10
-Artefacs
-Weapons 5
+Level 2
+XP 1400
+Attack 20
+Defense 40
+Hit Points 50
+Weapons 10
 Armor 2
-Helm 2
+Helm 1
 
 CrazyWomanJoelien
 Class Tank
@@ -53,7 +49,17 @@ XP 0
 Attack 10
 Defense 10
 Hit Point 10
-Artefacs
-Weapons 10
-Armor 10
-Helm 10
+Weapons 1
+Armor 1
+Helm 1
+
+kickAss
+Class Tank
+Level 1
+XP 0
+Attack 10
+Defense 10
+Hit Point 10
+Weapons 150
+Armor 1
+Helm 2

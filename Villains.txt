@@ -1,0 +1,141 @@
+Name Death1
+Level 1
+Row 6
+Col 6
+XP 100
+Attack 20
+Defense 10
+Hit Points 45
+Artefact Armor 1
+
+Name Evil1
+Level 1
+Row 8
+Col 3
+XP 100
+Attack 20
+Defense 5
+Hit Points 10
+Artefact Helm 1
+
+Name IKillYou1
+Level 1
+Row 7
+Col 7
+XP 100
+Attack 20
+Defense 15
+Hit Points 35
+Artefact Weapons 1
+
+Name KillOrBeKilled1
+Level 1
+Row 3
+Col 8
+XP 100
+Attack 20
+Defense 20
+Hit Points 30
+
+Name KillOrBeKilled1
+Level 1
+Row 1
+Col 5
+XP 100
+Attack 20
+Defense 20
+Hit Points 30
+
+Name Death2
+Level 2
+Row 3
+Col 11
+XP 200
+Attack 40
+Defense 10
+Hit Points 45
+Artefact Armor 2
+
+Name Evil2
+Level 2
+Row 10
+Col 2
+XP 200
+Attack 40
+Defense 15
+Hit Points 10
+Artefact Armor 2
+
+Name IKillYou2
+Level 2
+Row 4
+Col 13
+XP 200
+Attack 40
+Defense 35
+Hit Points 35
+
+Name KillOrBeKilled2
+Level 2
+Row 6
+Col 3
+XP 200
+Attack 40
+Defense 30
+Hit Points 30
+Artefact Armor 2
+
+Name Death3
+Level 3
+Row 2
+Col 5
+XP 300
+Attack 40
+Defense 20
+Hit Points 50
+Artefact Armor 3
+
+Name Evil3
+Level 3
+Row 17
+Col 8
+XP 300
+Attack 40
+Defense 15
+Hit Points 10
+Artefact Armor 3
+
+Name IKillYou3
+Level 3
+Row 16
+Col 1
+XP 300
+Attack 40
+Defense 35
+Hit Points 35
+Artefact Armor 3
+
+Name KillOrBeKilled3
+Level 3
+Row 15
+Col 11
+XP 300
+Defense 30
+Hit Points 30
+Artefact Armor 3
+
+Name Death4
+Level 4
+XP 400
+Attack 70
+Defense 40
+Hit Points 50
+Artefact Armor 4
+
+Name Evil4
+Level 4
+XP 400
+Attack 40
+Defense 50
+Hit Points 30
+Artefact Armor 4
