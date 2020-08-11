@@ -48,8 +48,8 @@ Hit Points 30
 
 Name Death2
 Level 2
-Row 3
-Col 11
+Row 9
+Col 4
 XP 200
 Attack 40
 Defense 10
@@ -58,8 +58,8 @@ Artefact Armor 2
 
 Name Evil2
 Level 2
-Row 10
-Col 2
+Row 2
+Col 8
 XP 200
 Attack 40
 Defense 15
@@ -68,8 +68,8 @@ Artefact Armor 2
 
 Name IKillYou2
 Level 2
-Row 4
-Col 13
+Row 8
+Col 6
 XP 200
 Attack 40
 Defense 35
@@ -77,8 +77,8 @@ Hit Points 35
 
 Name KillOrBeKilled2
 Level 2
-Row 6
-Col 3
+Row 3
+Col 10
 XP 200
 Attack 40
 Defense 30

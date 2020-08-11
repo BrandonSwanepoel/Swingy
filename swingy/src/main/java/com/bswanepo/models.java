@@ -2,7 +2,7 @@ package com.bswanepo;
 
 public class models {
 
-    public enum Seed {
+    public enum Map {
         EMPTY, PLAYER, WON, RUN
     }
 

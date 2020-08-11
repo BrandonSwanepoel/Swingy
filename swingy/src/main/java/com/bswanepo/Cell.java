@@ -1,13 +1,13 @@
 package com.bswanepo;
 
-import com.bswanepo.models.Seed;
+import com.bswanepo.models.Map;
 
 public class Cell {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_WHITE = "\u001B[37m";
     public static final String ANSI_YELLOW = "\u001B[33m";
-    Seed content;
+    Map content;
     
     int row, col; 
 
@@ -18,7 +18,7 @@ public class Cell {
     }
 
     public void clear() {
-        content = Seed.EMPTY;
+        content = Map.EMPTY;
     }
 
     public void paint() {

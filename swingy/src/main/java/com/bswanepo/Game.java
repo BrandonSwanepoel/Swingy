@@ -2,7 +2,7 @@ package com.bswanepo;
 
 import java.util.ArrayList;
 import com.bswanepo.models.GameState;
-import com.bswanepo.models.Seed;
+import com.bswanepo.models.Map;
 
 public class Game extends ConsoleQuestions {
     public Lobby lobby = new Lobby();
@@ -11,7 +11,7 @@ public class Game extends ConsoleQuestions {
     private int playerColumn;
     private Board board;
     private GameState currentState;
-    private Seed currentPlayer;
+    private Map currentPlayer;
     String[] gameOutCome = new String[2];
     int beatVillainRow = -1;
     int beatVillainCol = -1;
@@ -149,11 +149,11 @@ public class Game extends ConsoleQuestions {
         board.init();
         startGameBoard();
         board.paint();
-        currentPlayer = Seed.PLAYER;
+        currentPlayer = Map.PLAYER;
         currentState = GameState.PLAYING;
     }
 
-    public void playerMove(Seed theSeed) {
+    public void playerMove(Map thePlayer) {
         GamePlay gamePlay = new GamePlay();
         Board.getBoardRowAndCell();
         String direction = null;
@@ -206,22 +206,22 @@ public class Game extends ConsoleQuestions {
             Functions.missionText();
 
             if (won == true) {
-                board.cells[tempRow][tempColumn].content = Seed.WON;
+                board.cells[tempRow][tempColumn].content = Map.WON;
                 won = false;
             } else {
-                board.cells[tempRow][tempColumn].content = Seed.EMPTY;
+                board.cells[tempRow][tempColumn].content = Map.EMPTY;
             }
         }
-        if (board.cells[row][col].content == Seed.WON) {
+        if (board.cells[row][col].content == Map.WON) {
             won = true;
-            board.cells[row][col].content = theSeed;
-        } else if (board.cells[row][col].content != Seed.WON) {
-            board.cells[row][col].content = theSeed;
+            board.cells[row][col].content = thePlayer;
+        } else if (board.cells[row][col].content != Map.WON) {
+            board.cells[row][col].content = thePlayer;
 
         }
 
         if (beatVillainRow != -1 && beatVillainCol != -1) {
-            board.cells[beatVillainRow][beatVillainCol].content = Seed.WON;
+            board.cells[beatVillainRow][beatVillainCol].content = Map.WON;
             beatVillainRow = -1;
             beatVillainCol = -1;
 
@@ -271,8 +271,8 @@ public class Game extends ConsoleQuestions {
                             boolean runResult = gamePlay.run();
 
                             if (runResult == true) {
-                                board.cells[row][col].content = Seed.EMPTY;
-                                board.cells[tempRow][tempColumn].content = theSeed;
+                                board.cells[row][col].content = Map.EMPTY;
+                                board.cells[tempRow][tempColumn].content = thePlayer;
                                 playerRow = tempRow;
                                 playerColumn = tempColumn;
                                Functions.goodOdds();
@@ -331,7 +331,7 @@ public class Game extends ConsoleQuestions {
             int row = mapSize / 2;
             int col = mapSize / 2;
             if (row > 0 && row < Board.ROWS && col > 0 && col < Board.COLS) {
-                board.cells[row][col].content = Seed.PLAYER;
+                board.cells[row][col].content = Map.PLAYER;
                 board.currentRow = row;
                 board.currentCol = col;
                 validInput = true;

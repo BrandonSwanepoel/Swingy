@@ -34,7 +34,7 @@ Helm 15
 UncleBob
 Class Lazy
 Level 2
-XP 1400
+XP 2000
 Attack 20
 Defense 40
 Hit Points 50
