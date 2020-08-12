@@ -4,7 +4,7 @@ public class App {
 
     public static void main(String[] args) {
 
-        ConsoleQuestions consoleQuestions = new ConsoleQuestions();
+        LobbyController consoleQuestions = new LobbyController();
         consoleQuestions.startScreen();
     }
 }

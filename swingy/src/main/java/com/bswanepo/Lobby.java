@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class Lobby extends ConsoleQuestions  {
+public class Lobby extends LobbyController  {
 
-    VillainPlacement villainPlacement = new VillainPlacement();
+    // VillainPlacement villainPlacement = new VillainPlacement();
 
     public ArrayList<String> selectHero(final String heroName) {
         try {
@@ -153,39 +153,6 @@ public class Lobby extends ConsoleQuestions  {
         return null;
     }
 
-    // public ArrayList<String> getAllVillains(String level) {
-    //     try {
-    //         // ArrayList<String> villains = new ArrayList<>();
-    //         setVillainsPosition();
-
-    //         // final File file = new File("Villains.txt");
-    //     //     if (file != null) {
-    //     //         final Scanner fileReader = new Scanner(file);
-    //     //         while (fileReader.hasNextLine()) {
-
-    //     //             String data = fileReader.nextLine();
-    //     //             if(data.equals(level)){
-    //     //                 while (!data.equals("")) {
-    //     //                 villains.add(data);
-    //     //                 data = fileReader.nextLine();
-    //     //                 }
-
-    //     //             }
-
-    //     //         }
-    //     //         fileReader.close();
-    //     //         return villains;
-    //     //     }
-    //     // } catch (final FileNotFoundException e) {
-    //     //     System.out.println("An error occurred.");
-    //     //     e.printStackTrace();
-    //     //     System.exit(0);
-    //     // }
-    //     // return null;
-    // }
-
-    // Set villain Rows and Columns to unique positions
-
     public void setVillainsPosition() {
 
         PrintWriter writer;
@@ -220,7 +187,7 @@ public class Lobby extends ConsoleQuestions  {
                             i++;
                         }
                     }
-                    ConsoleQuestions.setVillainPlacement(villainRowValues, villainColValues);
+                    LobbyController.setVillainPlacement(villainRowValues, villainColValues);
 
                     writer.close();
 
@@ -253,7 +220,7 @@ public class Lobby extends ConsoleQuestions  {
     }
 
     public ArrayList<String> fillVillainPlaces() {
-        final String[] level = ConsoleQuestions.hero.get(2).split(" ");
+        final String[] level = LobbyController.hero.get(2).split(" ");
         final int mapSize = (Integer.parseInt(level[1]) - 1) * 5 + 10 - (Integer.parseInt(level[1]) % 2);
         final ArrayList<String> items = new ArrayList<>();
 

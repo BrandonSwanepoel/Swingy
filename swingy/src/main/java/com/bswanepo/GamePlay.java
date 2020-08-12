@@ -305,7 +305,4 @@ public class GamePlay extends Lobby implements Actions {
         return gainedXp(String.valueOf(xp), hero.get(0));
     }
 
-  
-
-
 }

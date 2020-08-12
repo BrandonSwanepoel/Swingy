@@ -1,6 +1,6 @@
 package com.bswanepo;
 
-public class Board extends ConsoleQuestions {
+public class Board extends LobbyController {
 
    public static int mapSize;
    public static int ROWS;

@@ -1,6 +1,6 @@
 package com.bswanepo;
 
-public class models {
+public class Models {
 
     public enum Map {
         EMPTY, PLAYER, WON, RUN

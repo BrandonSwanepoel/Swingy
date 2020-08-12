@@ -1,10 +1,10 @@
 package com.bswanepo;
 
 import java.util.ArrayList;
-import com.bswanepo.models.GameState;
-import com.bswanepo.models.Map;
+import com.bswanepo.Models.GameState;
+import com.bswanepo.Models.Map;
 
-public class Game extends ConsoleQuestions {
+public class GameController extends LobbyController {
     public Lobby lobby = new Lobby();
 
     private int playerRow;
@@ -20,18 +20,20 @@ public class Game extends ConsoleQuestions {
     boolean won = false;
     String levelUp = null;
 
-    public Game() {
+    public GameController() {
+        TheView view = new TheView();
         board = new Board();
         GamePlay gamePlay = new GamePlay();
         boolean valid = false;
         String action;
         initGame();
+        heroLvl = Functions.getLevel(hero);
+
         do {
 
             playerMove(currentPlayer);
             if (currentState == GameState.PLAYING) {
                 board.paint();
-
             }
 
             if (currentState == GameState.YOU_WON) {
@@ -40,16 +42,16 @@ public class Game extends ConsoleQuestions {
                 String xp = gamePlay.nextLevel(hero);
                 Functions.beatTheMap(xp);
                 levelUp = gamePlay.levelUp(hero.get(0));
-                
+
                 if (levelUp != null) {
 
-                    Functions.userLevelUp(levelUp);
+                    view.userLevelUp(levelUp);
                 }
-                
+
                 nextMission();
 
             } else if (currentState == GameState.FIGHT_WON) {
-                System.out.println("Lets see how you did brave one ...");
+                view.braveOne();
                 try {
                     Thread.sleep(3000);
                 } catch (InterruptedException e) {
@@ -61,7 +63,7 @@ public class Game extends ConsoleQuestions {
                 if (!artefact.isEmpty()) {
 
                     do {
-                        System.out.println("The villain dropped an artefact do you want to pick it up? [Y/N]");
+                        view.droppedArtifact();
 
                         action = c.readLine();
                         if (action.matches("Y|y|Yes|yes|YES")) {
@@ -76,46 +78,41 @@ public class Game extends ConsoleQuestions {
                                     e.printStackTrace();
                                 }
                                 Functions.clearScreen();
-                                Functions.missionText();
+                                view.missionText(heroLvl);
 
                             } else {
-                                System.out.println("That was not a real artefact.. It was dropped");
+                                view.notRealArtifact();
                                 try {
                                     Thread.sleep(2000);
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
                                 Functions.clearScreen();
-                                Functions.missionText();
+                                view.missionText(heroLvl);
                             }
                             valid = true;
 
                         } else if (action.matches("N|n|No|no|NO")) {
-                            Functions.clearScreen();
-
-                            System.out.println("Your loss...");
+                            view.yourLoss();
                             try {
                                 Thread.sleep(2000);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            Functions.clearScreen();
 
-                            Functions.missionText();
+                            view.missionText(heroLvl);
                             valid = true;
 
                         } else {
-                            System.out.println(ANSI_RED + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + ANSI_RESET);
-                            System.out.println("  Please pick a valid option");
-                            System.out.println(ANSI_RED + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + ANSI_RESET);
+                            view.pickValidOption("Valid option");
                             valid = false;
                         }
                     } while (valid == false);
                 }
                 if (levelUp != null) {
 
-                    Functions.userLevelUp(levelUp);
-                    Functions.missionText();
+                    view.userLevelUp(levelUp);
+                    view.missionText(heroLvl);
 
                 }
                 board.paint();
@@ -124,7 +121,7 @@ public class Game extends ConsoleQuestions {
             } else if (currentState == GameState.FIGHT_LOST) {
                 Functions.clearScreen();
 
-                System.out.println("Lets see how you did brave one ...");
+                view.braveOne();
                 try {
                     Thread.sleep(3000);
                 } catch (InterruptedException e) {
@@ -135,8 +132,8 @@ public class Game extends ConsoleQuestions {
 
             } else if (currentState == GameState.RUN) {
 
-                System.out.println("Not everyone is brave...");
-                Functions.missionText();
+                // System.out.println("Not everyone is brave...");
+                view.missionText(heroLvl);
                 currentState = GameState.PLAYING;
                 board.paint();
 
@@ -154,19 +151,18 @@ public class Game extends ConsoleQuestions {
     }
 
     public void playerMove(Map thePlayer) {
+        TheView view = new TheView();
         GamePlay gamePlay = new GamePlay();
         Board.getBoardRowAndCell();
         String direction = null;
         int tempRow = playerRow;
         int tempColumn = playerColumn;
-
+        heroLvl = Functions.getLevel(hero);
         boolean directionSet = false;
 
         do {
 
-            System.out.print("What direction do you want to move to: ");
-            System.out.println("North, East, South, West");
-            System.out.print("Pick a direction: ");
+            view.pickDirection();
             direction = c.readLine();
             if (direction.matches("North|north|N|n")) {
                 tempRow = playerRow;
@@ -189,9 +185,7 @@ public class Game extends ConsoleQuestions {
                 directionSet = true;
 
             } else {
-                System.out.println(ANSI_RED + "!!!!!!!!!!!!!!!!!!!!!!!!!!" + ANSI_RESET);
-                System.out.println("Please pick a valid Move!");
-                System.out.println(ANSI_RED + "!!!!!!!!!!!!!!!!!!!!!!!!!!" + ANSI_RESET);
+                view.pickValidOption("Valid option");
 
             }
         } while (directionSet == false);
@@ -203,7 +197,7 @@ public class Game extends ConsoleQuestions {
         Functions.clearScreen();
 
         if (row >= 0 && row < Board.ROWS && col >= 0 && col < Board.COLS) {
-            Functions.missionText();
+            view.missionText(heroLvl);
 
             if (won == true) {
                 board.cells[tempRow][tempColumn].content = Map.WON;
@@ -275,11 +269,11 @@ public class Game extends ConsoleQuestions {
                                 board.cells[tempRow][tempColumn].content = thePlayer;
                                 playerRow = tempRow;
                                 playerColumn = tempColumn;
-                               Functions.goodOdds();
+                                Functions.goodOdds();
                                 currentState = GameState.RUN;
                                 break;
                             } else if (runResult == false) {
-                               Functions.badOdds();
+                                Functions.badOdds();
                                 gameOutCome = gamePlay.fight(landedOnVillain, hero);
 
                                 if (gameOutCome[0] == "Winner") {
@@ -291,17 +285,11 @@ public class Game extends ConsoleQuestions {
                                 } else if (gameOutCome[0] == "Loser") {
                                     currentState = GameState.FIGHT_LOST;
                                 }
-                                // currentState = GameState.FIGHT_WON;
-
-                                // runFromVillainRow = row;
-                                // runFromVillainCol = col;
                                 picked = true;
                             }
                         } else {
                             Functions.clearScreen();
-                            System.out.println(ANSI_RED + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + ANSI_RESET);
-                            System.out.println("  Please pick a valid option");
-                            System.out.println(ANSI_RED + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + ANSI_RESET);
+                            view.pickValidOption("Valid option");
                         }
 
                     } while (picked == false);
@@ -335,8 +323,6 @@ public class Game extends ConsoleQuestions {
                 board.currentRow = row;
                 board.currentCol = col;
                 validInput = true;
-            } else {
-                System.out.println("You have Passed the Mission!");
             }
         } while (!validInput);
     }

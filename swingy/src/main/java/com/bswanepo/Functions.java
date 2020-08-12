@@ -2,7 +2,7 @@ package com.bswanepo;
 
 import java.util.ArrayList;
 
-public class Functions extends ConsoleQuestions {
+public class Functions extends LobbyController {
     public void paintHeroList() {
         System.out.println(ANSI_YELLOW + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
 
@@ -81,57 +81,9 @@ public class Functions extends ConsoleQuestions {
     }
 
     // Game Text Frontend
-    public static void userLevelUp(String levelUp) {
-        System.out.println("           " + ANSI_GREEN + "LEVEL UP!" + ANSI_RESET);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("           " + ANSI_RED + "LEVEL UP!" + ANSI_RESET);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("           " + ANSI_BLUE + "LEVEL UP!" + ANSI_RESET);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("           " + ANSI_YELLOW + "LEVEL UP!" + ANSI_RESET);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("           " + ANSI_PURPLE + "LEVEL UP!" + ANSI_RESET);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("     You are " + ANSI_YELLOW + "level " + levelUp + ANSI_RESET + " now!");
-        System.out.println("           " + ANSI_GREEN + "Well Done" + ANSI_RESET);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+   
 
-    public static void missionText() {
-        heroLvl = getLevel(hero);
-
-        System.out.println(ANSI_BLUE + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
-        System.out.println(ANSI_YELLOW + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
-        System.out.println("                 Map Level " + heroLvl);
-
-        System.out.println(" Mission: Try and exit the map without dying");
-        System.out.println(ANSI_YELLOW + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
-        System.out.println(ANSI_BLUE + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
-    }
+    
 
     public static void artifactPickUp(String[] result) {
         System.out.println(ANSI_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);

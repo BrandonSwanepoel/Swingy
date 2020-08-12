@@ -1,6 +1,6 @@
 package com.bswanepo;
 
-import com.bswanepo.models.Map;
+import com.bswanepo.Models.Map;
 
 public class Cell {
     public static final String ANSI_RESET = "\u001B[0m";

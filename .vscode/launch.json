@@ -8,7 +8,7 @@
             "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
-            "mainClass": "${file}"
+            "mainClass": "/home/brands/Documents/WTC/Swingy/swingy/src/main/java/com/bswanepo"
         },
         {
             "type": "java",
