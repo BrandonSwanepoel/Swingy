@@ -34,7 +34,7 @@ Helm 15
 UncleBob
 Class Lazy
 Level 2
-XP 2000
+XP 2400
 Attack 20
 Defense 40
 Hit Points 50
@@ -63,3 +63,14 @@ Hit Point 10
 Weapons 150
 Armor 1
 Helm 2
+
+john
+Class Tank
+Level 1
+XP 0
+Attack 10
+Defense 10
+Hit Point 10
+Weapons 10
+Armor 10
+Helm 10

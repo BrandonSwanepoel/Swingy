@@ -33,9 +33,10 @@ public class Board extends LobbyController {
    }
 
    public void init() {
+      TheView view = new TheView();
       getBoardRowAndCell();
       heroLvl = Functions.getLevel(hero);
-      Functions.gameStart();
+      view.gameStart(heroLvl);
       try {
          Thread.sleep(2000);
       } catch (InterruptedException e) {
@@ -49,6 +50,7 @@ public class Board extends LobbyController {
    }
 
    public void paint() {
+      TheView view = new TheView();
       getBoardRowAndCell();
 
       String line = "-";
@@ -74,7 +76,7 @@ public class Board extends LobbyController {
             }
          }
       }
-      Functions.compass();
+      view.compass();
    }
 
 }

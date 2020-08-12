@@ -1,11 +1,11 @@
 package com.bswanepo;
 
 import java.util.ArrayList;
-import com.bswanepo.Models.GameState;
-import com.bswanepo.Models.Map;
+import com.bswanepo.GameElements.GameState;
+import com.bswanepo.GameElements.Map;
 
 public class GameController extends LobbyController {
-    public Lobby lobby = new Lobby();
+    public LobbyModel lobby = new LobbyModel();
 
     private int playerRow;
     private int playerColumn;
@@ -40,7 +40,7 @@ public class GameController extends LobbyController {
                 Functions.clearScreen();
 
                 String xp = gamePlay.nextLevel(hero);
-                Functions.beatTheMap(xp);
+                view.beatTheMap(xp,hero);
                 levelUp = gamePlay.levelUp(hero.get(0));
 
                 if (levelUp != null) {
@@ -59,11 +59,11 @@ public class GameController extends LobbyController {
                 }
                 levelUp = gamePlay.levelUp(hero.get(0));
 
-                Functions.gameWinner(gameOutCome[1]);
+                view.gameWinner(gameOutCome[1]);
                 if (!artefact.isEmpty()) {
 
                     do {
-                        view.droppedArtifact();
+                        view.droppedArtefact();
 
                         action = c.readLine();
                         if (action.matches("Y|y|Yes|yes|YES")) {
@@ -71,7 +71,7 @@ public class GameController extends LobbyController {
 
                             String[] result = gamePlay.pickedUpArtefact(artefact, hero.get(0));
                             if (!result[0].equals("ERROR")) {
-                                Functions.artifactPickUp(result);
+                                view.artefactPickUp(result,artefact);
                                 try {
                                     Thread.sleep(4000);
                                 } catch (InterruptedException e) {
@@ -81,7 +81,7 @@ public class GameController extends LobbyController {
                                 view.missionText(heroLvl);
 
                             } else {
-                                view.notRealArtifact();
+                                view.notRealArtefact();
                                 try {
                                     Thread.sleep(2000);
                                 } catch (InterruptedException e) {
@@ -127,7 +127,7 @@ public class GameController extends LobbyController {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                Functions.lostGame();
+                view.lostGame();
                 nextMission();
 
             } else if (currentState == GameState.RUN) {
@@ -241,7 +241,7 @@ public class GameController extends LobbyController {
                     boolean picked = false;
                     do {
 
-                        Functions.landedOnVillain();
+                        view.landedOnVillain();
 
                         action = c.readLine();
                         if (action.matches("Fight|fight|f|F|FIGHT")) {
@@ -269,11 +269,11 @@ public class GameController extends LobbyController {
                                 board.cells[tempRow][tempColumn].content = thePlayer;
                                 playerRow = tempRow;
                                 playerColumn = tempColumn;
-                                Functions.goodOdds();
+                                view.goodOdds();
                                 currentState = GameState.RUN;
                                 break;
                             } else if (runResult == false) {
-                                Functions.badOdds();
+                                view.badOdds();
                                 gameOutCome = gamePlay.fight(landedOnVillain, hero);
 
                                 if (gameOutCome[0] == "Winner") {
@@ -297,14 +297,6 @@ public class GameController extends LobbyController {
 
             }
         }
-        // if(playerRun == false){
-        // board.currentRow = row;
-        // board.currentCol = col;
-        // }else{
-        // board.currentRow = tempRow;
-        // board.currentCol = tempColumn;
-        // playerRun = false;
-        // }
     }
 
     public void startGameBoard() {

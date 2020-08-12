@@ -14,17 +14,80 @@ public class TheView {
     Console c = System.console();
 
     String createHero() {
-        Functions.clearScreen();
         System.out.println("Do you want to create a Hero? [Y/N]" + ANSI_RED + " [" + ANSI_RESET
                 + "Type exit to leave the game" + ANSI_RED + "]" + ANSI_RESET);
         return c.readLine();
     };
 
     String selectHero() {
-        Functions.clearScreen();
         System.out.println("Do you want to Select a Hero? [Y/N]" + ANSI_RED + " [" + ANSI_RESET
                 + "Type exit to leave the game" + ANSI_RED + "]" + ANSI_RESET);
         return c.readLine();
+    }
+    void paintHeroList(ArrayList<String[]> heroes) {
+        System.out.println(ANSI_YELLOW + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+
+        int heroesLength = 0;
+        String line = " +-------";
+
+        for (int i = 0; i < 7; i++) {
+            if (i == 6) {
+                line += "---+";
+            } else {
+                line += "---";
+            }
+        }
+        for (String[] hero : heroes) {
+
+            for (int i = 0; i < hero.length; ++i) {
+                if (i == 0) {
+                    System.out.println(ANSI_GREEN + line + ANSI_RESET);
+
+                    System.out.println(ANSI_YELLOW + "            HERO NAME" + ANSI_RESET);
+
+                    if (hero[i].length() > 15) {
+                        System.out.println(ANSI_GREEN + "      " + hero[i] + ANSI_RESET);
+
+                    } else {
+                        System.out.println(ANSI_GREEN + "           " + hero[i] + ANSI_RESET);
+
+                    }
+                    System.out.println("");
+                    i++;
+                }
+                if (hero[i].equals("")) {
+                    i++;
+                    System.out.println(ANSI_GREEN + line + ANSI_RESET);
+
+                    System.out.println("");
+                    System.out.println(ANSI_YELLOW + "            HERO NAME" + ANSI_RESET);
+                    if (hero[i].length() > 20) {
+                        System.out.println(ANSI_GREEN + "       " + hero[i] + ANSI_RESET);
+
+                    } else {
+                        System.out.println(ANSI_GREEN + "                 " + hero[i] + ANSI_RESET);
+
+                    }
+                    System.out.println("");
+                    i++;
+                }
+                if (hero[i].length() > 15) {
+                    System.out.println("       " + hero[i]);
+
+                } else {
+                    System.out.println("           " + hero[i]);
+
+                }
+
+            }
+            heroesLength++;
+            if (heroesLength == heroes.size()) {
+                System.out.println(ANSI_GREEN + line + ANSI_RESET);
+                System.out.println(ANSI_YELLOW + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+
+            }
+        }
+
     }
 
     void exitMessage() {
@@ -111,27 +174,33 @@ public class TheView {
     }
 
     void pickValidOption(String version) {
-        Functions.clearScreen();
+        // Functions.clearScreen();
 
         if (version == "Y/N") {
             System.out.println(ANSI_RED + "~~~~~~~~~~~~~~~~~~");
             System.out.println("Please pick Y or N");
             System.out.println("~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
         } else if (version == "Empty") {
+            System.out.println(ANSI_RED + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             System.out.println("Error: Field is Empty or has invalid format\n");
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
 
         } else if (version == "Exists") {
+            System.out.println(ANSI_RED + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             System.out.println("Error: Hero already exists!");
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
 
         } else if (version == "Class does not exist") {
+            System.out.println(ANSI_RED + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             System.out.println("Error: Class Does not exist!");
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
         } else if (version == "Valid hero") {
             System.out.println(ANSI_RED + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             System.out.println("Please pick a valid Hero");
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
         } else if (version == "Valid option") {
             System.out.println(ANSI_RED + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            System.out.println("Please give a valid option");
+            System.out.println("Please give a valid response");
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
         }
     }
@@ -141,11 +210,11 @@ public class TheView {
         System.out.println("Lets see how you did brave one ...");
     }
 
-    void droppedArtifact() {
+    void droppedArtefact() {
         System.out.println("The villain dropped an artefact do you want to pick it up? [Y/N]");
     }
 
-    void notRealArtifact() {
+    void notRealArtefact() {
         System.out.println("That was not a real artefact.. It was dropped");
     }
 
@@ -210,5 +279,98 @@ public class TheView {
         System.out.print("What direction do you want to move to: ");
         System.out.println("North, East, South, West");
         System.out.print("Pick a direction: ");
+    }
+
+    void artefactPickUp(String[] result, ArrayList<String> artefact) {
+        System.out.println(ANSI_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+        System.out.println(ANSI_YELLOW + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+        System.out.println("  You picked up a level " + artefact.get(1) + " " + artefact.get(0) + " artefact");
+        System.out.println("    It increased your " + ANSI_GREEN + result[0] + ANSI_RESET + " with " + ANSI_YELLOW
+                + result[1] + ANSI_RESET + "!");
+        System.out.println(ANSI_YELLOW + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+
+        System.out.println(ANSI_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+    }
+
+    void gameWinner(String xp) {
+        System.out.println(ANSI_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+        System.out.println(ANSI_YELLOW + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+
+        System.out.println("      You are the " + ANSI_GREEN + "Winner" + ANSI_RESET + "!");
+        System.out.println("       You earned " + xp + " " + ANSI_YELLOW + "XP" + ANSI_RESET);
+
+        System.out.println(ANSI_YELLOW + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+
+        System.out.println(ANSI_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+    }
+
+    void beatTheMap(String xp, ArrayList<String> hero) {
+        System.out.println(ANSI_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+        System.out.println(ANSI_YELLOW + "  You have Passed the Mission!");
+        System.out.println("      Well done " + hero.get(0) + "!" + ANSI_RESET);
+        System.out.println(ANSI_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.print("~~~~~~~~~~" + ANSI_RESET);
+        System.out.print(ANSI_YELLOW + "Next level" + ANSI_RESET);
+        System.out.print(ANSI_GREEN + "~~~~~~~~~~\n");
+        System.out.print("~~~~~~~" + ANSI_RESET);
+        System.out.print(ANSI_YELLOW + " Gained " + xp + " XP " + ANSI_RESET);
+        System.out.print(ANSI_GREEN + "~~~~~~~~\n");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+    }
+
+    void lostGame() {
+        Functions.clearScreen();
+        System.out.println("You are the " + ANSI_RED + "LOSER " + ANSI_RESET + "...Sorry");
+        System.out.println(ANSI_RED + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("You have Failed the Mission!");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+    }
+
+    void goodOdds() {
+        Functions.clearScreen();
+        System.out.println(ANSI_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+        System.out.println("           The odds are in your favor");
+        System.out.println("      You don't have to fight the villain...");
+        System.out.println(ANSI_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+    }
+
+    void badOdds() {
+        Functions.clearScreen();
+        System.out.println(ANSI_RED + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+        System.out.println("         The odds are not in your favor");
+        System.out.println("   You are going to have to fight the villain...");
+        System.out.println(ANSI_RED + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+    }
+
+    void landedOnVillain() {
+        System.out.println(ANSI_RED + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+        System.out.println(" You have landed on a villain");
+        System.out.println(ANSI_RED + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+
+        System.out.println("Do you want to FIGHT or RUN? [fight/run]");
+    }
+
+    void compass() {
+        System.out.println("");
+        System.out.println(ANSI_WHITE + "    N" + ANSI_RESET);
+        System.out.println(ANSI_RED + "    |" + ANSI_RESET);
+        System.out.print(ANSI_WHITE + "W" + ANSI_RESET);
+        System.out.print(ANSI_BLUE + " ~~~~~ " + ANSI_RESET);
+        System.out.print(ANSI_WHITE + "E\n" + ANSI_RESET);
+        System.out.println(ANSI_RED + "    |" + ANSI_RESET);
+        System.out.println(ANSI_WHITE + "    S" + ANSI_RESET);
+        System.out.println("");
+    }
+
+    void gameStart(String heroLvl) {
+        System.out.println(ANSI_BLUE + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+        System.out.println(ANSI_YELLOW + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+        System.out.println("              The Game Started");
+        System.out.println("                  GoodLuck ");
+        System.out.println(ANSI_YELLOW + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+        System.out.println("                 Map Level " + heroLvl);
+        System.out.println(" Mission: Try and exit the map without dying");
+        System.out.println(ANSI_YELLOW + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
+        System.out.println(ANSI_BLUE + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
     }
 }

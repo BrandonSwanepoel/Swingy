@@ -2,7 +2,7 @@ package com.bswanepo;
 
 import java.util.ArrayList;
 
-public interface Actions {
+public interface Actionable{
     public String[] fight(ArrayList<String> villain,ArrayList<String> hero);
     public boolean run();
     public String levelUp(String heroName);

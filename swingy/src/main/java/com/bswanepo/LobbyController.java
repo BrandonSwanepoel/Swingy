@@ -22,7 +22,7 @@ public class LobbyController {
     public static final String ANSI_PURPLE = "\u001B[35m";
 
     public Functions functions;
-    public Lobby lobby;
+    public LobbyModel lobby;
     boolean heroCreated = false;
     String heroName = null;
     String heroClass = null;
@@ -38,8 +38,8 @@ public class LobbyController {
 
     public void startScreen() {
         TheView view = new TheView();
-        lobby = new Lobby();
-
+        lobby = new LobbyModel();
+        boolean selectHero = false;
         boolean validInput = false;
         String userInput = null;
         Functions.clearScreen();
@@ -51,34 +51,41 @@ public class LobbyController {
                 validInput = true;
             } else if (userInput.matches("N|n|No|no|NO")) {
                 // SELECT A HERO
-                userInput = view.selectHero();
 
-                if (userInput.matches("Y|y|yes|Yes|YES")) {
-                    Functions.clearScreen();
-                    createdHero = selectHero(createdHero);
-                    validInput = true;
-                } else if (userInput.matches("N|n|No|no|NO")) {
+                Functions.clearScreen();
+                do {
 
-                } else if (userInput.matches("exit|Exit|EXIT")) {
+                    userInput = view.selectHero();
 
-                    view.exitMessage();
-                    System.exit(0);
-                } else {
+                    if (userInput.matches("Y|y|yes|Yes|YES")) {
+                        Functions.clearScreen();
+                        selectHero = selectHero(selectHero);
+                        validInput = true;
+                    } else if (userInput.matches("N|n|No|no|NO")) {
+                        Functions.clearScreen();
+                        selectHero = true;
+                    } else if (userInput.matches("exit|Exit|EXIT")) {
 
-                }
+                        view.exitMessage();
+                        System.exit(0);
+                    } else {
+                        view.pickValidOption("Valid option");
+                    }
+                } while (selectHero == false);
             } else if (userInput.matches("exit|Exit|EXIT")) {
                 view.exitMessage();
                 System.exit(0);
 
             } else {
-                view.pickValidOption("Y/N");
+                view.pickValidOption("Valid option");
+
             }
         } while (validInput == false);
 
     }
 
-    public boolean createHero(final boolean createdHero) {
-        lobby = new Lobby();
+    public boolean createHero(boolean createdHero) {
+        lobby = new LobbyModel();
         TheView view = new TheView();
         boolean validClass = false;
         if (c != null) {
@@ -87,7 +94,7 @@ public class LobbyController {
                 heroName = c.readLine();
                 if (heroName.isBlank() || heroName.isEmpty()) {
                     view.pickValidOption("Empty");
-                    continue;
+                    // continue;
                 } else {
 
                     hero = lobby.selectHero(heroName);
@@ -95,42 +102,43 @@ public class LobbyController {
                         view.pickValidOption("Exists");
                         heroName = null;
                         continue;
-                    }
-                    do {
-
+                    } else {
+                        Functions.clearScreen();
                         view.createHeroClasses();
-                        view.pickHeroClass();
-                        heroClass = c.readLine();
-                        if (heroClass.isBlank() || heroClass.contains("^[[")) {
-                            view.pickValidOption("Empty");
-                            continue;
-                        } else if (heroClass.contains("Wizard") || heroClass.contains("Tank")
-                                || heroClass.contains("Lazy") || heroClass.contains("MonkeyKing")) {
-                            lobby.createHero(heroName, heroClass, hero);
-                            validClass = true;
-                        }
 
-                        else {
-                            view.pickValidOption("Class does not exist");
-                            continue;
-                        }
-                    } while (validClass == false);
-                    view.heroCreated();
-                    startOrEndGame();
-                    heroCreated = true;
+                        do {
+
+                            view.pickHeroClass();
+                            heroClass = c.readLine();
+                            if (heroClass.isBlank() || heroClass.contains("^[[")) {
+                                view.pickValidOption("Empty");
+                                continue;
+                            } else if (heroClass.contains("Wizard") || heroClass.contains("Tank")
+                                    || heroClass.contains("Lazy") || heroClass.contains("MonkeyKing")) {
+                                lobby.createHero(heroName, heroClass, hero);
+                                validClass = true;
+                            }
+
+                            else {
+                                view.pickValidOption("Class does not exist");
+                                continue;
+                            }
+                        } while (validClass == false);
+                        view.heroCreated();
+                        // startOrEndGame();
+                        createdHero = true;
+                    }
                 }
-            } while (heroCreated == false);
+            } while (createdHero == false);
         }
         return createdHero;
     }
 
-    public boolean selectHero(boolean createdHero) {
+    public boolean selectHero(boolean selectHero) {
         TheView view = new TheView();
-        final Functions functions = new Functions();
-
-        final Lobby lobby = new Lobby();
+        lobby = new LobbyModel();
         heroes = lobby.getAllHeroes();
-        functions.paintHeroList();
+        view.paintHeroList(heroes);
 
         try {
 
@@ -140,25 +148,25 @@ public class LobbyController {
                 hero = lobby.selectHero(heroName);
                 if (hero.isEmpty()) {
                     view.pickValidOption("Valid hero");
-                    continue;
+                    // continue;
                 } else {
                     view.pickedHero(hero);
-                    startOrEndGame();
+                    // startOrEndGame();
                     selectHero = true;
-                    createdHero = true;
+                    // selectedHero = true;
 
                 }
             } while (selectHero == false);
         } catch (final Exception e) {
             System.out.println(e);
         }
-        return createdHero;
+        return selectHero;
 
     }
 
     public void startOrEndGame() {
         TheView view = new TheView();
-        final Lobby lobby = new Lobby();
+        lobby = new LobbyModel();
         String result = null;
         boolean validInput = false;
         boolean exit = false;
@@ -180,6 +188,7 @@ public class LobbyController {
                         view.exitMessage();
                         validInput = true;
                         exit = true;
+                        
 
                         System.exit(0);
 
@@ -188,6 +197,7 @@ public class LobbyController {
                         validInput = true;
                         exit = true;
                         startScreen();
+                        startOrEndGame();
 
                     } else {
                         view.pickValidOption("Valid option");
@@ -203,7 +213,7 @@ public class LobbyController {
 
     public void nextMission() {
         TheView view = new TheView();
-        final Lobby lobby = new Lobby();
+        lobby = new LobbyModel();
         String result = null;
         boolean validInput = false;
         boolean exit = false;

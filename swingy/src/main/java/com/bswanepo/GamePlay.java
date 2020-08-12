@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class GamePlay extends Lobby implements Actions {
+public class GamePlay extends LobbyModel implements Actionable {
 
     @Override
     public String[] fight(final ArrayList<String> villain, final ArrayList<String> hero) {

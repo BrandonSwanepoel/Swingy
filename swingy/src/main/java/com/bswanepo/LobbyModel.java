@@ -9,14 +9,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class Lobby extends LobbyController  {
+public class LobbyModel extends LobbyController {
 
     // VillainPlacement villainPlacement = new VillainPlacement();
 
     public ArrayList<String> selectHero(final String heroName) {
         try {
-
-            hero.clear();
+            // if (hero != null) {
+            //     hero.clear();
+            // }
             final File file = new File("Heroes.txt");
             if (file != null) {
                 final Scanner fileReader = new Scanner(file);
@@ -39,14 +40,14 @@ public class Lobby extends LobbyController  {
             e.printStackTrace();
             System.exit(0);
         }
-        return null;
+        return hero;
     }
 
     public ArrayList<String> createHero(final String heroName, final String heroClass, ArrayList<String> hero) {
         PrintWriter writer;
         try {
 
-            hero.clear();
+            // hero.clear();
 
             writer = new PrintWriter(new FileWriter("Heroes.txt", true));
 
@@ -71,7 +72,7 @@ public class Lobby extends LobbyController  {
             System.exit(0);
 
         }
-        return null;
+        return hero;
     }
 
     public ArrayList<String[]> getAllHeroes() {
@@ -113,8 +114,7 @@ public class Lobby extends LobbyController  {
             ArrayList<String> villain = new ArrayList<>();
             String[] tmpRow;
             String[] tmpCol;
-            String lvl= null;
-            // villain.clear();
+            String lvl = null;
             final File file = new File("Villains.txt");
             if (file != null) {
                 Scanner fileReader = new Scanner(file);
@@ -122,25 +122,25 @@ public class Lobby extends LobbyController  {
 
                     String data = fileReader.nextLine();
                     if (data.contains("Name")) {
-                        lvl= fileReader.nextLine();
+                        lvl = fileReader.nextLine();
                         if (lvl.contains(hero.get(2))) {
-                        tmpRow = fileReader.nextLine().split(" ");
-                        tmpCol = fileReader.nextLine().split(" ");
-                        if (tmpRow[0].equals("Row") && tmpCol[0].equals("Col")) {
+                            tmpRow = fileReader.nextLine().split(" ");
+                            tmpCol = fileReader.nextLine().split(" ");
+                            if (tmpRow[0].equals("Row") && tmpCol[0].equals("Col")) {
 
-                            if (row == Integer.parseInt(tmpRow[1]) && col == Integer.parseInt(tmpCol[1])) {
+                                if (row == Integer.parseInt(tmpRow[1]) && col == Integer.parseInt(tmpCol[1])) {
 
-                                while (!data.equals("") && fileReader.hasNextLine()) {
-                                    villain.add(data);
-                                    // System.out.println(data);
+                                    while (!data.equals("") && fileReader.hasNextLine()) {
+                                        villain.add(data);
+                                        // System.out.println(data);
 
-                                    data = fileReader.nextLine();
+                                        data = fileReader.nextLine();
+                                    }
+                                    fileReader.close();
+                                    return villain;
                                 }
-                                fileReader.close();
-                                return villain;
                             }
                         }
-                    }
                     }
                 }
                 fileReader.close();
